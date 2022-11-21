@@ -1,0 +1,28 @@
+version: "3.7"
+
+services:
+  db:
+    image: postgres:14.0-alpine
+    container_name: rishat_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    env_file:
+      - ./.env
+  web:
+    build: ./
+    container_name: rishat_web
+    command: >
+      sh -c "python manage.py makemigrations && 
+      python manage.py migrate
+      && python manage.py runserver 0.0.0.0:8000"
+    ports:
+      - 8000:8000
+    volumes:
+      - .:/usr/src/rishat_test
+    depends_on:
+      - db
+    env_file:
+      - ./.env
+
+volumes:
+  postgres_data:

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}
+        <title>Main Page</title>
+    {% endblock %}
+</head>
+<body>
+
+{% block h1 %}
+<h1> Тестовое задание</h1>
+{% endblock %}
+
+<p>Django + Stripe API бэкенд</p>
+
+<p><b>Реализованы страницы:</b></p>
+
+<ul>
+    <li><a href="{% url 'main_page' %}">Главная страница</a></li>
+    <li><a href="{% url 'admin:index' %}">Панель администратора</a></li>
+    <li><a href="{% url 'item_list' %}">Список всех продуктов</a></li>
+    <li><a href="{% url 'item' 1 %}">Пример страницы товара для продукта №1</a></li>
+{#    <li><a href="{% url 'buy_page' 1 %}">Получение id сессии для покупки товара №1</a></li>#}
+</ul>
+{% block content %}
+{% endblock %}
+
+{% block footer %}
+<br>
+<b>Выполнил:</b>
+<p><i>Каменев Михаил</i></p>
+<p><i>тел. +79528286374</i></p>
+<p><a href="mailto:dlyapicem@gmail.com"><i>dlyapicem@gmail.com</i></a></p>
+<p><a href="https://t.me/m_kamenev"><i>Телеграмм</i></a></p>
+{% endblock %}
+</body>
+</html>

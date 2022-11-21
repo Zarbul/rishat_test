@@ -1,0 +1,27 @@
+{% block title %}
+    <title>Buy Item {{ item.pk }}</title>
+{% endblock %}
+
+{% block content %}
+    <a href="{% url 'item_list' %}"><-- All items</a>
+
+    <h1>{{ item.name }}</h1>
+    <p>{{ item.description }}</p>
+    <p><b>Price:</b> {{ item.price }}  </p>
+    <button id="buy-button">Buy</button>
+
+
+    <script src="https://js.stripe.com/v3/"></script>
+    <script type="text/javascript">
+        let stripe = Stripe("{{ PK_STRIPE_KEY }}");
+        {#let stripe = Stripe("pk_test_51LinSFH760TVlQGs4W6t4z4XBUfgjBGwKqWzVEcbEKAmFKFPwWY2kmtObd6thOnWAV6LJvZuGTYAF1VpmVlTJGCT00xfBbnm4C");#}
+        let buyButton = document.getElementById('buy-button');
+        buyButton.addEventListener('click', function() {
+            fetch('{% url 'buy_page' item.id %}', {method: 'GET'})
+                .then(function(response) {return response.json();})
+                .then(function(session) {return stripe.redirectToCheckout({ sessionId: session.id });
+                })
+        });
+    </script>
+
+{% endblock %}

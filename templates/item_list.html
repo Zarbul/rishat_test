@@ -1,0 +1,22 @@
+{% extends 'main.html' %}
+
+{% block title %}
+    <title>All items</title>
+{% endblock %}
+
+{% block h1 %}
+<h1>All items</h1>
+{% endblock %}
+
+{% block content %}
+<a href="{% url 'main_page' %}"><-- Main Page</a>
+
+<ul>
+    {% for item in item_list %}
+        <li>{{ item.id }} - <a href="{% url 'item' item.id %}">{{ item.name }}</a>
+            <b>{{ item.price|floatformat:2 }}$</b> < {{ item.description }} >
+        </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
